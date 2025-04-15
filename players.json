@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Player1",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 2,
+    "name": "Player2",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 3,
+    "name": "Player3",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 4,
+    "name": "Player4",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 5,
+    "name": "Player5",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 6,
+    "name": "Player6",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 7,
+    "name": "Player7",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 8,
+    "name": "Player8",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 9,
+    "name": "Player9",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 10,
+    "name": "Player10",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 11,
+    "name": "Player11",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 12,
+    "name": "Player12",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 13,
+    "name": "Player13",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 14,
+    "name": "Player14",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 15,
+    "name": "Player15",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 16,
+    "name": "Player16",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 17,
+    "name": "Player17",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 18,
+    "name": "Player18",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 19,
+    "name": "Player19",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  },
+  {
+    "id": 20,
+    "name": "Player20",
+    "current_bid": 0,
+    "highest_bidder": null,
+    "is_sold": false
+  }
+]

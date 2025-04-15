@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>경매 대시보드 - {{ username }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='image/logo_c_csgns_bgr_ER1.png') }}" type="image/png">
+  <style>
+    @font-face {
+      font-family: 'S-CoreDream-3Light';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      font-family: 'S-CoreDream-3Light', 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .top-bar {
+      padding: 10px 20px;
+      background-color: #343a40;
+      color: white;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      overflow: hidden;
+    }
+    .panel {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      overflow: auto;
+    }
+    .left-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .right-panel {
+      flex: 1.2;
+    }
+    .panel h2 {
+      font-size: 1.25rem;
+    }
+    table {
+      width: 100%;
+    }
+    .footer {
+      background-color: #fff;
+      padding: 10px 20px;
+      border-top: 1px solid #dee2e6;
+      text-align: center;
+    }
+    .table-success td {
+      background-color: #d4edda !important;
+    }
+    .table-danger td {
+      background-color: #f8d7da !important;
+    }
+    #auction-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  </style>
+</head>
+<body style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">
+  <div class="dashboard">
+    <div class="top-bar d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">
+        🏆 Spectator Dashboard 
+        <small class="text-muted">Logged in as: {{ username }}</small>
+      </h4>
+    
+      <form action="{{ url_for('logout') }}" method="POST" class="mb-0">
+        <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+      </form>
+    </div>
+    <div class="main-content">
+      <!-- Left Panel -->
+      <div class="panel left-panel">
+        <div>
+          <h2>🔔 현재 경매</h2>
+          <div id="current-player-box">
+            <p><strong>이름:</strong> <span id="player-name">불러오는중...</span></p>
+            <p><strong>현재 입찰가:</strong> <span id="current-bid">-</span></p>
+            <p><strong>최고가 입찰자:</strong> <span id="highest-bidder">-</span></p>
+            <p><strong>남은 시간:</strong> <span id="time-remaining">-</span></p>
+            <p class="text-muted">※ 본 서버는 해외망에 존재하므로 약간의 딜레이가 발생할 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h2>🧑‍🤝‍🧑 팀 현황</h2>
+          <table class="table table-sm table-bordered" id="team-status">
+            <thead class="table-light">
+              <tr>
+                <th>주장</th>
+                <th style="width:60%">입찰된 선수</th>
+                <th>사용한 포인트</th>
+                <th>남은 포인트</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="panel right-panel">
+        <h2>📋 전체 선수 목록</h2>
+        <table class="table table-sm table-bordered" id="all-players">
+          <thead class="table-light">
+            <tr>
+              <th>번호</th>
+              <th>이름</th>
+              <th>입찰가</th>
+              <th>입찰주</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="footer small text-muted">
+      &copy; STUDIO CSGNS All Right Reserved.
+    </div>
+  </div>
+
+  <!-- 오버레이: 경매 종료 시 표시 -->
+  <div id="auction-overlay">⚠️ 경매가 종료되었습니다. ⚠️<br>관리자에 의해 경매가 종료되었습니다.</div>
+
+<script>
+  function updateCurrentPlayer() {
+    $.get('/current_player', function (data) {
+      if (data.status === 'waiting') {
+        $('#player-name').text('경매가 일시중지되었습니다. 대기중...');
+        $('#current-bid').text('-');
+        $('#highest-bidder').text('-');
+        $('#time-remaining').text('-');
+      } else {
+        $('#player-name').text(data.name);
+        $('#current-bid').text(data.current_bid);
+        $('#highest-bidder').text(data.highest_bidder || '-');
+        $('#time-remaining').text(data.remaining_time + ' 초');
+      }
+    });
+  }
+
+  function updateTeamStatus() {
+    $.get('/team_status', function (data) {
+      const tbody = $('#team-status tbody');
+      tbody.empty();
+      for (const captain in data) {
+        const info = data[captain];
+        tbody.append(`
+          <tr>
+            <td>${captain}</td>
+            <td>${info.members.join(', ')}</td>
+            <td>${info.points_used}</td>
+            <td>${info.points_left}</td>
+          </tr>
+        `);
+      }
+    });
+  }
+
+  function updateAllPlayers() {
+    $.get('/all_players', function (data) {
+      const tbody = $('#all-players tbody');
+      tbody.empty();
+      for (const p of data) {
+        let rowClass = "";
+        if (p.is_sold) rowClass = "table-success";
+        else if (p.current_bid === 0 && p.highest_bidder === null) rowClass = "table-danger";
+        tbody.append(`
+          <tr class="${rowClass}">
+            <td>${p.id}</td>
+            <td>${p.name}</td>
+            <td>${p.current_bid}</td>
+            <td>${p.highest_bidder || '-'}</td>
+            <td>${p.is_sold ? "경매 완료!" : "대기중..."}</td>
+          </tr>
+        `);
+      }
+    });
+  }
+
+  function checkServerMessage() {
+    $.get('/server_message', function(data) {
+      if (data.message.includes("경매가 종료되었습니다")) {
+        $('#auction-overlay').show();
+      } else {
+        $('#auction-overlay').hide();
+      }
+    });
+  }
+
+  // 실시간 반영
+  setInterval(() => {
+    updateCurrentPlayer();
+    updateTeamStatus();
+    updateAllPlayers();
+    checkServerMessage();
+  }, 1000);
+</script>
+
+</body>
+</html>

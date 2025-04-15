@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>500 Internal Server Error</title>
+  <style>
+    @font-face {
+      font-family: 'S-CoreDream-3Light';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'S-CoreDream-3Light', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #6e7e9a, #2b88d8);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+    .error-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    .error-container h1 {
+      font-size: 72px;
+      margin: 0 0 10px;
+      color: #2b88d8;
+    }
+    .error-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .error-container p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .error-container a.button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .error-container a.button:hover {
+      background: linear-gradient(135deg, #0056b3, #004494);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #f1f1f1;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">
+  <div class="error-container">
+    <h1>500</h1>
+    <h2>서버 오류</h2>
+    <p>요청을 처리하는 도중 서버에 오류가 발생했습니다.<br>잠시 후 다시 시도해 주세요.</p>
+    <a href="/" class="button">홈으로 돌아가기</a>
+  </div>
+  <footer>&copy; 2025 STUDIO CSGNS. All rights reserved.</footer>
+</body>
+</html>

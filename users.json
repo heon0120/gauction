@@ -1,0 +1,32 @@
+[
+  {
+    "username": "Captain1",
+    "token": "e153044b0385f576ad5e296615aa709f",
+    "points": 1000
+  },
+  {
+    "username": "Captain2",
+    "token": "665ca5051c4d75cf36ef945dc246d62b",
+    "points": 1000
+  },
+  {
+    "username": "Captain3",
+    "token": "9ed39c9d4faf7fccc89aaf344b3ca933",
+    "points": 1000
+  },
+  {
+    "username": "Captain4",
+    "token": "773776d2b7b318bb580acce999b4460f",
+    "points": 1000
+  },
+  {
+    "username": "admin",
+    "token": "6cd08549e20251294116b5ec4662cc5a",
+    "points": 0
+  },
+  {
+    "username": "spectator",
+    "token": "spectator",
+    "points": 0
+  }
+]
