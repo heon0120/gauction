@@ -9,7 +9,7 @@
 # [===         Copyright 2025 STUDIO CSGNS All Right Reserved       ===]
 # [====================================================================]
 # [====================================================================]
-import redis
+# import redis # 원래는 워커 늘려서 할려고 redis사용할려함
 import json
 import threading
 import time
