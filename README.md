@@ -1,6 +1,7 @@
 # gauction
 The Team Auction Page
 본 소스코드는 초기 소스입니다. 실서비스는 다른점 유의 부탁드립니다. V1.0.3 - Beta
+
 실서비스 가이드라인은 https://gauction-doc.netlify.app/ 에서 보실수있습니다.
 # What is it?
 단순한 경매페이지의 프론트엔드 / 백엔드 코드입니다. 백엔드는 파이썬으로 작성되었습니다.
